@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-test-app';
+
+  minimalDate: string;
+  maximalDate: string;
 }

@@ -21,8 +21,8 @@ export class CalendarComponent implements OnInit {
   @Input() minimalDate: string;
   @Input() maximalDate: string;
 
-  @Input() minimalRangeSelected: string;
-  @Input() maximalRangeSelected: string;
+  @Input() minimalRangeSelected: any;
+  @Input() maximalRangeSelected: any;
 
   minRange: number;
   maxRange: number;
@@ -41,16 +41,16 @@ export class CalendarComponent implements OnInit {
       inRange:
         index + 1 >= (this.minRange || 31) && index + 1 <= (this.maxRange || 0),
       disabled:
-        index + 1 <= (this.parseDate(this.minimalDate) || 1) ||
-        index + 1 >= (this.parseDate(this.maximalDate) || 31)
+        index + 1 <= (this.parseDate(this.minimalDate) || 0) ||
+        index + 1 >= (this.parseDate(this.maximalDate) || 32)
     }));
   }
 
   sendDataToParent(event: Event) {
     if (!this.minimalRangeSelected)
-      this.minimalRangeSelected = parseInt(event.target.id);
+      this.minimalRangeSelected = parseInt((event.target as any).id);
     else if (!this.maximalRangeSelected)
-      this.maximalRangeSelected = parseInt(event.target.id);
+      this.maximalRangeSelected = parseInt((event.target as any).id);
     else {
       this.maximalRangeSelected = undefined;
       this.minimalRangeSelected = undefined;
@@ -68,10 +68,11 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    console.log(this.minimalDate, this.maximalDate);
     this.minRange = this.parseRange(this.minimalRangeSelected);
     this.maxRange = this.parseRange(this.maximalRangeSelected);
 
-    console.log(this.minRange, this.maxRange);
     if ((this.minRange || 0) > (this.maxRange || 31)) this.swapRanges();
     this.unsetDays();
   }
