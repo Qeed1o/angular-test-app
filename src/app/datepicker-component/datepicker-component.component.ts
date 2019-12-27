@@ -27,6 +27,7 @@ export class DatepickerComponentComponent implements OnInit {
   ngOnInit() {}
 
   onInputClick(event: Event) {
+    console.log(this.minimalDate,this.maximalDate)
     event.preventDefault();
   }
 

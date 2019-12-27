@@ -1,7 +1,7 @@
-<input type="date" />
-<input type="date" />
+<input type="date" (input)="minimalDate = $event.target.value"/> <span>-Minimal</span><br>
+<input type="date" (input)="maximalDate = $event.target.value"/> <span>-Maximal</span><br>
 <app-datepicker-component
   [minimalDate]="minimalDate"
   [maximalDate]="maximalDate"
 >
-</app-datepicker-component>
+</app-datepicker-component> <span>-Datepicker</span>

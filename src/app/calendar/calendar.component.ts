@@ -68,8 +68,6 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    console.log(this.minimalDate, this.maximalDate);
     this.minRange = this.parseRange(this.minimalRangeSelected);
     this.maxRange = this.parseRange(this.maximalRangeSelected);
 
