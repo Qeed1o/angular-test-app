@@ -1,0 +1,31 @@
+<div class="calendar">
+  <div id="calendar-header">
+    <div class="row">
+      <i class="navigate-left"><</i>
+      December, 2019
+      <i class="navigate-right">></i>
+    </div>
+    <div class="row">
+      <div>m</div>
+      <div>t</div>
+      <div>w</div>
+      <div>t</div>
+      <div>f</div>
+      <div>s</div>
+      <div>s</div>
+    </div>
+  </div>
+  <div class="separator"></div>
+  <div id="calendar-body">
+    <div
+      class="day"
+      *ngFor="let day of days"
+      [id]="day.id"
+      (click)="sendDataToParent($event); $event.stopPropagation(); ngOnInit()"
+      [class.isDisabled]="day.disabled"
+      [class.inRange]="day.inRange"
+    >
+      {{ day.id }}
+    </div>
+  </div>
+</div>
