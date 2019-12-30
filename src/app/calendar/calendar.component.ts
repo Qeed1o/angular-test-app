@@ -32,8 +32,7 @@ export class CalendarComponent implements OnInit {
   parseDate = (date: string): number =>
     date ? parseInt(date.split("-")[2]) : null;
 
-  parseRange = (value: string): number | null =>
-    value ? parseInt(value) : null;
+  parseRange = (value: string): number => (value ? parseInt(value) : null);
 
   unsetDays() {
     this.days = this.days.map((_, index) => ({
@@ -71,7 +70,28 @@ export class CalendarComponent implements OnInit {
     this.minRange = this.parseRange(this.minimalRangeSelected);
     this.maxRange = this.parseRange(this.maximalRangeSelected);
 
-    if ((this.minRange || 0) > (this.maxRange || 31)) this.swapRanges();
+    let minRange: number = this.minRange || 0;
+    let maxRange: number = this.maxRange || 31;
+
+    if (minRange > maxRange) this.swapRanges();
+
+    if (
+      minRange <= (this.parseDate(this.minimalDate) || -1) ||
+      maxRange >= (this.parseDate(this.maximalDate) || 32)
+    ) {
+      alert("Так нельзя");
+      this.minimalRangeSelected = undefined;
+      this.maximalRangeSelected = undefined;
+
+      this.minRange = undefined;
+      this.maxRange = undefined;
+
+      this.selectRange.emit({
+        minimalRangeSelected: this.minimalRangeSelected,
+        maximalRangeSelected: this.maximalRangeSelected
+      });
+    }
+
     this.unsetDays();
   }
 }
